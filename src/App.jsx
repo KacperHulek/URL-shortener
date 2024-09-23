@@ -2,8 +2,8 @@ import illustrationWorking from "./assets/illustration-working.svg";
 
 function App() {
   return (
-    <>
-      <nav className="pt-12 px-36 flex flex-row justify-between items-center mb-32 text-grayishViolet text-lg font-bold">
+    <div className="flex flex-col items-center h-full">
+      <nav className="pt-12 flex flex-row justify-between items-center mb-32 text-grayishViolet text-lg font-bold mainWidth">
         <ul className="flex flex-row gap-9 items-center">
           <li>
             <a href="" className="text-4xl mr-2 text-veryDarkBlue">
@@ -42,7 +42,7 @@ function App() {
           </li>
         </ul>
       </nav>
-      <main className="px-36 flex flex-row relative">
+      <main className="flex flex-row relative mainWidth">
         <div className="w-3/5 mb-52">
           <h1 className="text-7xl font-bold leading-tight text-veryDarkViolet">
             More than just shorter links
@@ -62,14 +62,17 @@ function App() {
           <img
             src={illustrationWorking}
             alt=""
-            className="absolute min-h-fit min-w-fit -translate-y-16 -right-32"
+            className="absolute min-h-fit min-w-fit -translate-y-16 -right-72"
           />
         </div>
       </main>
-      <div className="bg-slate-100 px-36 relative">
-        <div className="flex justify-center items-center bg-shorten-desktop bg-cover h-32 w-full bg-darkViolet rounded-xl relative -top-16">
-          <input type="text" className="h-12 rounded-lg mr-6 ml-16 w-full"/>
-          <button className="text-white bg-cyan rounded-lg py-3 px-7 hover:opacity-70 mr-16 min-w-fit">Shorten it!</button>
+
+      <div className="bg-slate-100 relative w-full flex flex-col items-center">
+        <div className="mainWidth flex justify-center items-center bg-shorten-desktop bg-cover h-32 bg-darkViolet rounded-xl relative -top-16">
+          <input type="text" className="h-12 rounded-lg mr-6 ml-16 w-full" />
+          <button className="text-white bg-cyan rounded-lg py-3 px-7 hover:opacity-70 mr-16 min-w-fit">
+            Shorten it!
+          </button>
         </div>
         <ul className="mb-12"></ul>
         <div className="flex items-center justify-center flex-col">
@@ -80,7 +83,7 @@ function App() {
           </p>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

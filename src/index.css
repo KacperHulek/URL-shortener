@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@layer utilities {
+  .mainWidth {
+    width: 75%;
+    max-width: 1280px;
+    min-width: 950px;
+  }
+}
+
 html,
 body {
   height: 100%;
