@@ -14,6 +14,7 @@ export default {
       },
       backgroundImage: {
         "shorten-desktop": "url('./src/assets/bg-shorten-desktop.svg')",
+        "boost-desktop": "url('./src/assets/bg-boost-desktop.svg')"
       },
     },
   },
