@@ -1,41 +1,27 @@
 import illustrationWorking from "./assets/illustration-working.svg";
+import FooterLinkItem from "./components/FooterLinkItem";
 import HeroCard from "./components/HeroCard";
+import NavLinkItem from "./components/NavLinkItem";
+import SocialLinkItem from "./components/SocialLinkItem";
 function App() {
   return (
     <div className="flex flex-col items-center h-full overflow-x-hidden">
-      <nav className="pt-12 flex flex-row justify-between items-center mb-32 text-grayishViolet text-lg font-bold mainWidth">
+      <nav className="pt-12 flex flex-row justify-between items-center mb-32 text-grayishViolet text-base font-bold mainWidth">
         <ul className="flex flex-row gap-9 items-center">
           <li>
-            <a href="" className="text-4xl mr-2 text-veryDarkBlue">
-              Shortly
-            </a>
+            <h2 className="text-4xl mr-2 text-veryDarkBlue">Shortly</h2>
           </li>
-          <li>
-            <a href="" className="hover:text-veryDarkBlue">
-              Features
-            </a>
-          </li>
-          <li>
-            <a href="" className="hover:text-veryDarkBlue">
-              Pricing
-            </a>
-          </li>
-          <li>
-            <a href="" className="hover:text-veryDarkBlue">
-              Resources
-            </a>
-          </li>
+          <NavLinkItem content="Features" url="" />
+          <NavLinkItem content="Pricing" url="" />
+          <NavLinkItem content="Resources" url="" />
         </ul>
         <ul className="flex flex-row gap-8">
-          <li>
-            <a href="" className="hover:text-veryDarkBlue">
-              Login
-            </a>
-          </li>
+          <NavLinkItem content="Login" url="" />
+          {/* See if optional prop is possible */}
           <li>
             <a
               href=""
-              className="text-white bg-cyan rounded-full py-3 px-7 hover:opacity-70"
+              className="text-white bg-cyan rounded-full py-2 px-5 hover:opacity-70"
             >
               Sign Up
             </a>
@@ -112,7 +98,9 @@ function App() {
         </div>
       </section>
       <section className="flex flex-col items-center w-full bg-boost-desktop bg-cover bg-darkViolet">
-        <h2 className="mb-10 mt-16 text-3xl text-white">Boost your links today!</h2>
+        <h2 className="mb-10 mt-16 text-4xl text-white font-bold">
+          Boost your links today!
+        </h2>
         <a
           href=""
           className="text-white bg-cyan rounded-full text-xl py-4 px-12 mb-16"
@@ -120,7 +108,44 @@ function App() {
           Get Started
         </a>
       </section>
-      
+      <footer className="w-full bg-veryDarkViolet flex justify-center pt-16">
+        <div className="flex flex-row justify-end mainWidth">
+          <h2 className="text-4xl mr-56 text-white font-bold">Shortly</h2>
+          <div className="flex flex-row justify-between w-full">
+            <ul>
+              <li>
+                <h3 className="text-white font-bold mb-6">Features</h3>
+              </li>
+              <FooterLinkItem content="Link Shortening" url="" />
+              <FooterLinkItem content="Branded Links" url="" />
+              <FooterLinkItem content="Analytics" url="" />
+            </ul>
+            <ul>
+              <li>
+                <h3 className="text-white font-bold mb-6">Resources</h3>
+              </li>
+              <FooterLinkItem content="Blog" url="" />
+              <FooterLinkItem content="Developers" url="" />
+              <FooterLinkItem content="Support" url="" />
+            </ul>
+            <ul>
+              <li>
+                <h3 className="text-white font-bold mb-6">Company</h3>
+              </li>
+              <FooterLinkItem content="About" url="" />
+              <FooterLinkItem content="Our Team" url="" />
+              <FooterLinkItem content="Careers" url="" />
+              <FooterLinkItem content="Contact" url="" />
+            </ul>
+            <ul className="flex flex-row">
+              <SocialLinkItem type="facebook" url="" />
+              <SocialLinkItem type="instagram" url="" />
+              <SocialLinkItem type="pinterest" url="" />
+              <SocialLinkItem type="twitter" url="" />
+            </ul>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
