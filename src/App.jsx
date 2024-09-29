@@ -55,7 +55,6 @@ function App() {
       </main>
       <section className="bg-slate-100 relative w-full flex flex-col items-center">
         <ShortenLinkInput />
-        <ul className="mb-12"></ul>
         <div className="flex items-center justify-center flex-col mb-20">
           <h2 className="text-veryDarkViolet text-4xl font-bold mb-5">
             Advanced Statistics
