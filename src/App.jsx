@@ -2,6 +2,7 @@ import illustrationWorking from "./assets/illustration-working.svg";
 import FooterLinkItem from "./components/FooterLinkItem";
 import HeroCard from "./components/HeroCard";
 import NavLinkItem from "./components/NavLinkItem";
+import ShortenLinkInput from "./components/ShortenLinkInput";
 import SocialLinkItem from "./components/SocialLinkItem";
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
           <li>
             <a
               href=""
-              className="text-white bg-cyan rounded-full py-2 px-5 hover:opacity-70"
+              className="text-white bg-cyan rounded-full py-2 px-5 hover:brightness-110"
             >
               Sign Up
             </a>
@@ -39,7 +40,7 @@ function App() {
           </p>
           <a
             href=""
-            className="text-white bg-cyan rounded-full text-xl py-4 px-12"
+            className="text-white bg-cyan rounded-full text-xl py-3 px-10 hover:brightness-110"
           >
             Get Started
           </a>
@@ -53,12 +54,7 @@ function App() {
         </div>
       </main>
       <section className="bg-slate-100 relative w-full flex flex-col items-center">
-        <div className="mainWidth flex justify-center items-center bg-shorten-desktop bg-cover h-32 bg-darkViolet rounded-xl relative -top-16">
-          <input type="text" className="h-12 rounded-lg mr-6 ml-16 w-full" />
-          <button className="text-white bg-cyan rounded-lg py-3 px-7 hover:opacity-70 mr-16 min-w-fit">
-            Shorten it!
-          </button>
-        </div>
+        <ShortenLinkInput />
         <ul className="mb-12"></ul>
         <div className="flex items-center justify-center flex-col mb-20">
           <h2 className="text-veryDarkViolet text-4xl font-bold mb-5">
@@ -103,12 +99,12 @@ function App() {
         </h2>
         <a
           href=""
-          className="text-white bg-cyan rounded-full text-xl py-4 px-12 mb-16"
+          className="text-white bg-cyan rounded-full text-xl py-4 px-12 mb-16 hover:brightness-110"
         >
           Get Started
         </a>
       </section>
-      <footer className="w-full bg-veryDarkViolet flex justify-center pt-16">
+      <footer className="w-full bg-veryDarkViolet flex justify-center pt-16 pb-6">
         <div className="flex flex-row justify-end mainWidth">
           <h2 className="text-4xl mr-56 text-white font-bold">Shortly</h2>
           <div className="flex flex-row justify-between w-full">
