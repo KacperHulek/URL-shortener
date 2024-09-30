@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import LinkList from "./LinkList";
-
+// TODO: change the name to ShortenLinkSection or something similar
 const ShortenLinkInput = ({ LinkList }) => {
   const [link, setLink] = useState("");
   const [linkArr, setLinkArr] = useState([]);
@@ -51,7 +51,6 @@ const ShortenLinkInput = ({ LinkList }) => {
     // }
 
     setLinkArr([...linkArr, { value: link }]);
-    console.log(linkArr);
   };
 
   return (
@@ -78,13 +77,19 @@ const ShortenLinkInput = ({ LinkList }) => {
           </button>
         </form>
       </div>
-      <ul className="mb-12">
+      <ul className="mb-12 mainWidth relative -top-10">
         {linkArr.map((item, index) => (
           <li
             key={index}
-            className="bg-white p-4 rounded-lg shadow flex justify-between items-center"
+            className="bg-white p-4 mb-4 rounded-sm shadow-sm flex justify-between items-center"
           >
-            <span className="text-gray-700">{item.value}</span>
+            <span className="text-veryDarkViolet">{item.value}</span>
+            <div>
+              <span className="text-cyan mr-5">shortened link</span>
+              <button className="bg-cyan text-white text-sm rounded-md mr-5 min-w-fit py-2 px-6 hover:brightness-110">
+                Copy
+              </button>
+            </div>
           </li>
         ))}
       </ul>
