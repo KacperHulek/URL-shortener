@@ -6,6 +6,7 @@ const ShortenLinkInput = ({ LinkList }) => {
   const [linkArr, setLinkArr] = useState([]);
   const [shortenedLink, setShortenedLink] = useState("");
   const [error, setError] = useState("");
+  const [copiedIndex, setCopiedIndex] = useState(null);
 
   const handleInputChange = (e) => {
     setLink(e.target.value);
@@ -50,7 +51,17 @@ const ShortenLinkInput = ({ LinkList }) => {
     //   );
     // }
 
-    setLinkArr([...linkArr, { value: link }]);
+    const mockShortenedLink = `https://short.link/${Math.random()
+      .toString(36)
+      .substring(2, 5)}`;
+    setLinkArr([...linkArr, { original: link, shortened: mockShortenedLink }]);
+    setLink("");
+  };
+
+  const handleCopy = (index, shortenedLink) => {
+    navigator.clipboard.writeText(shortenedLink);
+    setCopiedIndex(index);
+    // setTimeout(() => setCopiedIndex(null), 3000);
   };
 
   return (
@@ -83,11 +94,18 @@ const ShortenLinkInput = ({ LinkList }) => {
             key={index}
             className="bg-white p-4 mb-4 rounded-sm shadow-sm flex justify-between items-center"
           >
-            <span className="text-veryDarkViolet">{item.value}</span>
+            <span className="text-veryDarkViolet">{item.original}</span>
             <div>
-              <span className="text-cyan mr-5">shortened link</span>
-              <button className="bg-cyan text-white text-sm rounded-md mr-5 min-w-fit py-2 px-6 hover:brightness-110">
-                Copy
+              <span className="text-cyan mr-5">{item.shortened}</span>
+              <button
+                className={`text-white text-sm rounded-md mr-5 min-w-fit py-2 w-24 ${
+                  copiedIndex === index
+                    ? "bg-darkViolet"
+                    : "bg-cyan hover:brightness-110"
+                }`}
+                onClick={() => handleCopy(index, item.shortened)}
+              >
+                {copiedIndex === index ? "Copied!" : "Copy"}
               </button>
             </div>
           </li>
