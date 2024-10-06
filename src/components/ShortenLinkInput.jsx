@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import LinkList from "./LinkList";
-// TODO: change the name to ShortenLinkSection or something similar
+// TODO: change the name of this component to ShortenLinkSection or something similar
+// TODO: implement custom url validator
+// TODO: change the fetched url in handleSubmit
+
 const ShortenLinkInput = ({ LinkList }) => {
   const [link, setLink] = useState("");
   const [linkArr, setLinkArr] = useState([]);
   const [shortenedLink, setShortenedLink] = useState("");
   const [error, setError] = useState("");
   const [copiedIndex, setCopiedIndex] = useState(null);
+
+  const baseUrl = "https://localhost:7143/api/UrlShortener/";
 
   const handleInputChange = (e) => {
     setLink(e.target.value);
@@ -22,40 +27,37 @@ const ShortenLinkInput = ({ LinkList }) => {
       return;
     }
 
-    const data = { long_url: link };
-    // console.log(import.meta.env.VITE_API_KEY);
-    // response.link = shortened link
+    try {
+      const res = await fetch(`${baseUrl}shortenUrl`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          originalUrl: link,
+        }),
+      });
+      if (!res.ok) {
+        const errorData = await res.text();
+        throw new Error(errorData || `HTTP error! status: ${res.status}`);
+      }
 
-    // try {
-    //   const res = await fetch("https://api-ssl.bitly.com/v4/shorten", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
-    //     },
-    //     body: JSON.stringify(data),
-    //   });
+      const result = await res.json();
 
-    //   if (!res.ok) {
-    //     throw new Error(`HTTP error! status: ${res.status}`);
-    //   }
-
-    //   const result = await res.json();
-    //   setShortenedLink(result.link);
-    //   setLinkArr([...linkArr, result.link]);
-    //   //   rerender list of links whenever a change to the array happens
-    // } catch (error) {
-    //   console.error("Error:", error);
-    //   setError(
-    //     "An error occurred while shortening the link. Please try again."
-    //   );
-    // }
-
-    const mockShortenedLink = `https://short.link/${Math.random()
-      .toString(36)
-      .substring(2, 5)}`;
-    setLinkArr([...linkArr, { original: link, shortened: mockShortenedLink }]);
-    setLink("");
+      setLinkArr([
+        ...linkArr,
+        {
+          original: result.originalUrl,
+          shortened: baseUrl + result.shortCode,
+        },
+      ]);
+    } catch (error) {
+      console.error("Error:", error);
+      setError(
+        "An error occurred while shortening the link. Please try again."
+      );
+    }
   };
 
   const handleCopy = (index, shortenedLink) => {
