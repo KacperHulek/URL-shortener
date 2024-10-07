@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LinkList from "./LinkList";
 // TODO: change the name of this component to ShortenLinkSection or something similar
 // TODO: implement custom url validator
 // TODO: change the fetched url in handleSubmit
 
+const savedLinks = () => JSON.parse(localStorage.getItem("links")) || [];
+
 const ShortenLinkInput = ({ LinkList }) => {
   const [link, setLink] = useState("");
-  const [linkArr, setLinkArr] = useState([]);
+  const [linkArr, setLinkArr] = useState(savedLinks());
   const [shortenedLink, setShortenedLink] = useState("");
   const [error, setError] = useState("");
   const [copiedIndex, setCopiedIndex] = useState(null);
+
+  useEffect(() => {
+    localStorage.setItem("links", JSON.stringify(linkArr));
+  }, [linkArr]);
 
   const baseUrl = "https://localhost:7143/api/UrlShortener/";
 
@@ -24,6 +30,11 @@ const ShortenLinkInput = ({ LinkList }) => {
 
     if (!link) {
       setError("Please enter a URL to shorten.");
+      return;
+    }
+
+    if (linkArr.find((e) => e.original === link)) {
+      setError("The link has been already shortened!");
       return;
     }
 
@@ -92,15 +103,16 @@ const ShortenLinkInput = ({ LinkList }) => {
       </div>
       <ul className="mb-12 mainWidth relative -top-10">
         {linkArr.map((item, index) => (
+          // TODO: Fix css using grid layout
           <li
             key={index}
             className="bg-white p-4 mb-4 rounded-sm shadow-sm flex justify-between items-center"
           >
-            <span className="text-veryDarkViolet">{item.original}</span>
-            <div>
-              <span className="text-cyan mr-5">{item.shortened}</span>
+            <span className="text-veryDarkViolet mr-4">{item.original}</span>
+            <div className="flex flex-row items-center justify-end">
+              <p className="text-cyan mr-5">{item.shortened}</p>
               <button
-                className={`text-white text-sm rounded-md mr-5 min-w-fit py-2 w-24 ${
+                className={`text-white text-sm rounded-md mr-5 py-2 min-w-24 h-10 ${
                   copiedIndex === index
                     ? "bg-darkViolet"
                     : "bg-cyan hover:brightness-110"
